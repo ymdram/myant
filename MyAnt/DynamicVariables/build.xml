@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="MyProject" default="init" basedir=".">
+	<description>
+    simple example build file
+  </description>
+<!-- set global properties for this build -->
+	<target name="init">
+		<xslt style="filterproduct.xsl" in="ugbu-integrations.xml" out="selected.ugbu-integration.xml" force="true">
+			<outputproperty name="method" value="xml"/>
+			<outputproperty name="indent" value="yes"/>
+			<param name="productName" expression="${productName}"/>
+		</xslt>
+	</target>
+</project>

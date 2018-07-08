@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><ugbu-integrations>
+	<product name="product3" short-name="pr3">
+		<patches>
+			<patch>pr3t3</patch>
+		</patches>
+	</product>
+</ugbu-integrations>

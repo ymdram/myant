@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="MyProject" default="init" basedir=".">
+	<description>
+    simple example build file
+  </description>
+  
+<!-- set global properties for this build  -->
+	<target name="init">
+	<scp file="C:/Users/MYARA/Documents/MyVPN.txt" trust="true" todir="myara@den01gzn.us.oracle.com:/scratch/gbuora" password="Ysrm*123"/> 
+	</target>
+</project>

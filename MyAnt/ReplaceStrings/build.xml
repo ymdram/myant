@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MyProject" default="init" basedir=".">
+	<description>
+    simple example build file
+  </description>
+<!-- set global properties for this build -->
+	<target name="init">
+		<replace dir="D:/spl/SS/2.2.0.0/Release/Patch/CSS_2200_ROLLUP_03/27833487" value="27833487">
+		  <include name="**/*.*"/>
+		  <replacetoken>25593428</replacetoken>
+		</replace>
+	</target>
+</project>

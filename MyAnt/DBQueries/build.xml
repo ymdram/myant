@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="MyProject" default="init" basedir=".">
+<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+	<description>
+    simple example build file
+  </description>
+<!-- set global properties for this build -->
+	<target name="init">
+	
+		<DBObjectLifeCycle db.hostname="slc05rxp.us.oracle.com"
+                     db.port="1521" 
+					 db.sid="INTPDB3"
+                     db.user.name="SET20SOACC_OUNC22"
+                     db.user.password="manager"
+                     db.execute.directory="D:/spl/SS/2.2.0.0/Release/Patch/CSS_2200_LANG_01/27835864/files/Install/DB/language/translationSQL/ar" 
+					 action="create"
+                     db.execute.file="NC_delete_data.sql_ARB.sql"/>
+		<DBObjectLifeCycle db.hostname="slc05rxp.us.oracle.com"
+                     db.port="1521" 
+					 db.sid="INTPDB3"
+                     db.user.name="SET20SOACC_OUNC22"
+                     db.user.password="manager"
+                     db.execute.directory="D:/spl/SS/2.2.0.0/Release/Patch/CSS_2200_LANG_01/27835864/files/Install/DB/language/translationSQL/ar" 
+					 action="create"
+                     db.execute.file="insert_data2_NC*.sql"/>
+	</target>
+	<path id="oracle.jdbc.path">
+	  <fileset dir="C:/spl/SS/tools/oracle_122100/wlserver/server/lib/">
+	   <include name="ojdbc6.jar"/>
+	  </fileset>
+	 </path>
+	<macrodef name="DBObjectLifeCycle">
+		<attribute name="jdbc.driver" default="oracle.jdbc.OracleDriver"/>
+		<attribute name="db.hostname"/>
+		<attribute name="db.port"/>
+		<attribute name="db.sid"/>
+		<attribute name="db.user.name"/>
+		<attribute name="db.user.password"/>
+		<attribute name="db.execute.file"/>
+		<attribute name="db.execute.directory"/>
+		<attribute name="action"/>
+		<attribute name="debug" default="true"/>
+		<attribute name="onerror" default="abort"/>
+		<sequential>
+			<echo>@{db.execute.file}</echo>
+			<var name="tempHostname" unset="true"/>
+			<var name="dburl" unset="true"/>
+			<property name="tempHostname" value="@{db.hostname}"/>
+			<property name="dburl" value="jdbc:oracle:thin:@//${tempHostname}:@{db.port}/@{db.sid}"/>
+			<if>
+				<equals arg1="@{action}" arg2="create"/>
+				<then>
+					<sql encoding="utf8" driver="@{jdbc.driver}" url="${dburl}" userid="@{db.user.name}" password="@{db.user.password}" onerror="@{onerror}" classpathref="oracle.jdbc.path">
+						<path>
+							<fileset dir="@{db.execute.directory}">
+								<include name="@{db.execute.file}"/>
+							</fileset>
+						</path>
+					</sql>
+				</then>
+				<elseif>
+					<equals arg1="@{action}" arg2="drop"/>
+					<then>
+						<sql encoding="utf8" driver="@{jdbc.driver}" url="${dburl}" userid="@{db.user.name}" password="@{db.user.password}" onerror="@{onerror}" classpathref="oracle.jdbc.path">
+							<path>
+								<fileset dir="@{db.execute.directory}">
+									<include name="@{db.execute.file}"/>
+								</fileset>
+							</path>
+						</sql>
+					</then>
+				</elseif>
+				<else>
+					<echo>Invalid action passed</echo>
+				</else>
+			</if>
+		</sequential>
+	</macrodef>
+</project>

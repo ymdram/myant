@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><ugbu-integrations>
+	<product name="product1" short-name="pr1">
+		<patches>
+			<patch>pr1t1</patch>
+			<patch>pr1t2</patch>
+			<patch>pr1t3</patch>
+			<patch>pr1t3</patch>
+		</patches>
+	</product>
+	<product name="product2" short-name="pr2">
+		<patches>
+			<patch>pr2t1</patch>
+		</patches>
+	</product>
+	<product name="product3" short-name="pr3">
+		<patches>
+			<patch>pr3t3</patch>
+			<patch>pr3t3</patch>
+		</patches>
+	</product>
+</ugbu-integrations>
